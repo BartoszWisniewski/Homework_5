@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @WebServlet(urlPatterns = "/infoShareAcademy")
 public class infoShareAcademyServlet extends HttpServlet {
@@ -47,26 +45,16 @@ public class infoShareAcademyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
 
-        String param1new = req.getParameter("param1");
-        String param2new = req.getParameter("param2");
+        Enumeration parameterNames = req.getParameterNames();
 
-        Map<String, Object> modelPost = new HashMap<>();
-        modelPost.put("param1", param1new);
-        modelPost.put("param2", param2new);
-
-        modelPost.entrySet().forEach(e -> {
-            out.println(e.getKey() + " = " + e.getValue());
-            out.println("<br>");
-        });
-
-        resp.setContentType("text/html");
-
-        String param3new = req.getParameter("param3");
-        String[] paramArray = param3new.split("\\s+");
-
-        for (int i = 0; i < paramArray.length; i++) {
-            out.println("param3 = " + paramArray[i]);
-            out.println("<br>");
+        while(parameterNames.hasMoreElements())
+        {
+            Object obj = parameterNames.nextElement();
+            String fieldName = (String) obj;
+            String fieldValue = req.getParameter(fieldName);
+            out.println(fieldName + " = " + fieldValue );
         }
-    }
+
+
+        }
 }

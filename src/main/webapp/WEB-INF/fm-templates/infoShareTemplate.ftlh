@@ -4,8 +4,8 @@
 
 <p>Insert parameters</p>
 <form action="infoShareAcademy" method="post">
-    <input type="text" name="param1">
-    <input type="text" name="param2">
-    <input type="text" name="param3">
+    <input type="text" name="one">
+    <input type="text" name="two">
+    <input type="text" name="three">
     <input type="submit" value="send">
 </form>
