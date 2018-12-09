@@ -7,6 +7,5 @@
     <input type="text" name="param1">
     <input type="text" name="param2">
     <input type="text" name="param3">
-    <input type="text" name="param4">
     <input type="submit" value="send">
 </form>

@@ -48,22 +48,25 @@ public class infoShareAcademyServlet extends HttpServlet {
 
         String param1new = req.getParameter("param1");
         String param2new = req.getParameter("param2");
-        String param3new = req.getParameter("param3") + " " + req.getParameter("param4");
+
+        String param3new = req.getParameter("param3");
+        String[] paramArray = param3new.split("\\s+");
 
         Map<String, Object> modelPost = new HashMap<>();
         modelPost.put("param1", param1new);
         modelPost.put("param2", param2new);
-        modelPost.put("param3", param3new);
 
-        final String TEMPLATE_NAME = "infoShareTemplatePost";
+        resp.setContentType("text/html");
 
-        Template template = templateProvider.getTemplate(getServletContext(), TEMPLATE_NAME);
+        PrintWriter out = resp.getWriter();
 
-        try {
-            template.process(modelPost, resp.getWriter());
-        } catch (TemplateException e) {
-            e.printStackTrace();
+        modelPost.entrySet().forEach(e->{
+            out.println(e.getKey()+ " = " + e.getValue());
+            out.println("<br>");
+        });
+        for(int i=0; i< paramArray.length;i++){
+            out.println("param3 = "+ paramArray[i]);
+            out.println("<br>");
         }
-
     }
 }
