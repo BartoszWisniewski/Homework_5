@@ -45,27 +45,27 @@ public class infoShareAcademyServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        PrintWriter out = resp.getWriter();
 
         String param1new = req.getParameter("param1");
         String param2new = req.getParameter("param2");
-
-        String param3new = req.getParameter("param3");
-        String[] paramArray = param3new.split("\\s+");
 
         Map<String, Object> modelPost = new HashMap<>();
         modelPost.put("param1", param1new);
         modelPost.put("param2", param2new);
 
-        resp.setContentType("text/html");
-
-        PrintWriter out = resp.getWriter();
-
-        modelPost.entrySet().forEach(e->{
-            out.println(e.getKey()+ " = " + e.getValue());
+        modelPost.entrySet().forEach(e -> {
+            out.println(e.getKey() + " = " + e.getValue());
             out.println("<br>");
         });
-        for(int i=0; i< paramArray.length;i++){
-            out.println("param3 = "+ paramArray[i]);
+
+        resp.setContentType("text/html");
+
+        String param3new = req.getParameter("param3");
+        String[] paramArray = param3new.split("\\s+");
+
+        for (int i = 0; i < paramArray.length; i++) {
+            out.println("param3 = " + paramArray[i]);
             out.println("<br>");
         }
     }
